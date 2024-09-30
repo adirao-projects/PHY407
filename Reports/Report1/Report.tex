@@ -66,55 +66,7 @@
     \section{Question 1}
         \subsection{Part (a)}
 
-        \begin{lstlisting}
-
-function RELATIVE_ERROR(VALUE, REFERENCE) {
-    output absolute_value(VALUE - REFERNECE) / REFERENCE
-}
-
-function STD_METHOD_1(X_LIST) {
-    LEN_X = length of X_LIST
-    SUM_X = sum of X_LIST
-    MEAN_X = SUM_X / LEN_X
-
-
-    STD = 0
-
-    for i=0 to LEN_X - 1 {
-        STD = STD + power((X_LIST[i] - MEAN_X),2)
-    }
-
-    STD = power(((1/(LEN_X - 1)) * STD), 0.5)
-
-    output STD
-}
-
-function STD_METHOD_2(X_LIST) {
-    LEN_X = length of X_LIST
-    SUM_X = sum of X_LIST
-    MEAN_X = SUM_X / LEN_X
-
-    STD = 0
-
-    for i=0 to LEN_X - 1 {
-        STD = STD + power(X_LIST[i], 2) - LEN_X*power(MEAN_X, 2)
-    }
-
-    STD = power(((1/(LEN_X - 1)) * STD), 0.5)
-
-    output STD
-}
-
-X_DATA = some list of elements
-STD_1 = STD_METHOD_1(X_DATA)
-STD_2 = STD_METHOD_2(X_DATA)
-TRUE_STD = numpy(X_DATA, ddof=1)
-
-output "Method 1" : RELATIVE_ERROR(STD_1, TRUE_STD)
-
-output "Method 2" : RELATIVE_ERROR(STD_1, TRUE_STD)
-
-        \end{lstlisting}
+        \lstinputlisting[language=psuedo]{q1a.psuedo}
 
     \subsection{Part (b)}
         %\lstinputlisting[language=python]{../code/question_1.py}
@@ -136,6 +88,10 @@ output "Method 2" : RELATIVE_ERROR(STD_1, TRUE_STD)
 \subsection{Part (b)}
 \subsection{Part (c)}
 \subsection{Part (d)}
+\begin{lstlisting}[style=console]
+STD NPY: 1.4087150935148697e-16
+ROUNDOFF : 1.414213562373095e-16
+\end{lstlisting}
 
 \section{Question 3}
 \subsection{Part (a)}
@@ -159,9 +115,6 @@ Optimized Simpson with 16 Slices : 3.141592651224822
 Optimized Trapezoidal with 8192 Slices : 3.1415926511062726
 \end{lstlisting}
 \subsection{Part (d)}
-\begin{lstlisting}[language=python]
-ppiwn
-\end{lstlisting}
 
 \begin{lstlisting}[style=console]
 Error 2: 0.00016276037786200348
