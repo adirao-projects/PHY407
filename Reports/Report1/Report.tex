@@ -1,0 +1,173 @@
+\documentclass[reprint, amsmath,amssymb, aps]{revtex4-2}
+
+\bibliographystyle{apsrev4-2}
+
+\usepackage{graphicx}
+\usepackage{dcolumn}
+\usepackage{bm}
+
+\input{preamble/preamble}
+\input{preamble/tikz}
+\input{preamble/macros}
+
+\usepackage[backend=bibtex]{biblatex}
+% ========================================= %
+% Change for each document [!!!]
+\newcommand\course{PHY407}	% Course Code [!!!]
+\newcommand\doctitle{Formal Report Template} % Report Title [!!!]
+\newcommand\firstauthorname{Aditya K. Rao 1008307761}
+%\newcommand\secondauthorname{Jillian Henkel 1006804282}
+\newcommand\taname{Prof. M. Diamond} % TA Name [!!!]
+\newcommand{\location}{MP257} % Location [!!!]
+% ========================================= %
+ 
+\pagenumbering{gobble}
+\usepackage{listings}
+
+\renewcommand\lstlistingname{Code Reference}
+\renewcommand\lstlistlistingname{Code Reference}
+\usepackage{tikz}
+\usetikzlibrary{patterns}
+
+\usepackage{circuitikz}
+
+%\addbibresource{references.bib}
+\usepackage{lipsum}
+
+\begin{document}
+\onecolumngrid
+\pagenumbering{arabic}
+\title{\doctitle}
+\author{\firstauthorname}
+\affiliation{University of Toronto, McLennan Physical Laboratories}
+
+\date{\today} %Put in date of submission [!!!]
+
+\preprint{APS/123-QED}
+
+%\title{Manuscript Title:\\with Forced Linebreak}% Force line breaks with \\
+\thanks{\textbf{Location:} \location}%
+
+\begin{abstract}
+    \lipsum[1]
+\end{abstract}
+
+    \maketitle
+    \tableofcontents 
+    %\clearpage
+    %\pagenumbering{arabic}
+    %So the heading doesn't show up on table of contents page
+    %\lhead{\yourname\ \vspace{0.1cm} \\ \course}
+\twocolumngrid
+    \lhead{\firstauthorname\vspace{0.1cm}}
+    \chead{\textbf{\course} \\ \doctitle}
+    \rhead{\textbf{Prof:} \taname \\ \textbf{Loc:} \location}
+
+    \section{Question 1}
+        \subsection{Part (a)}
+
+        \begin{lstlisting}
+
+function RELATIVE_ERROR(VALUE, REFERENCE) {
+    output absolute_value(VALUE - REFERNECE) / REFERENCE
+}
+
+function STD_METHOD_1(X_LIST) {
+    LEN_X = length of X_LIST
+    SUM_X = sum of X_LIST
+    MEAN_X = SUM_X / LEN_X
+
+
+    STD = 0
+
+    for i=0 to LEN_X - 1 {
+        STD = STD + power((X_LIST[i] - MEAN_X),2)
+    }
+
+    STD = power(((1/(LEN_X - 1)) * STD), 0.5)
+
+    output STD
+}
+
+function STD_METHOD_2(X_LIST) {
+    LEN_X = length of X_LIST
+    SUM_X = sum of X_LIST
+    MEAN_X = SUM_X / LEN_X
+
+    STD = 0
+
+    for i=0 to LEN_X - 1 {
+        STD = STD + power(X_LIST[i], 2) - LEN_X*power(MEAN_X, 2)
+    }
+
+    STD = power(((1/(LEN_X - 1)) * STD), 0.5)
+
+    output STD
+}
+
+X_DATA = some list of elements
+STD_1 = STD_METHOD_1(X_DATA)
+STD_2 = STD_METHOD_2(X_DATA)
+TRUE_STD = numpy(X_DATA, ddof=1)
+
+output "Method 1" : RELATIVE_ERROR(STD_1, TRUE_STD)
+
+output "Method 2" : RELATIVE_ERROR(STD_1, TRUE_STD)
+
+        \end{lstlisting}
+
+    \subsection{Part (b)}
+        %\lstinputlisting[language=python]{../code/question_1.py}
+
+    \subsection{Part (c)}
+
+% \begin{lstlisting}[console]
+
+% \end{lstlisting}
+
+    \subsection{Part (d)}
+
+% \begin{lstlisting}[console]
+
+% \end{lstlisting}
+
+\section{Question 2}
+\subsection{Part (a)}
+\subsection{Part (b)}
+\subsection{Part (c)}
+\subsection{Part (d)}
+
+\section{Question 3}
+\subsection{Part (a)}
+    \begin{align*}
+        \int_{0}^{1} \frac{4}{1 + x^2}\,dx &= 4 \int_{0}^{1} \frac{1}{1 + x^2}\,dx \\
+        &= 4 \arctan(x) \Big|_{0}^{1} \\
+        &= 4 (\frac{\pi}{4} - 0) \\
+        &= \pi
+    \end{align*}
+\subsection{Part (b)}
+\begin{lstlisting}[style=console]
+Simpson Method: 3.14156862745098
+Trapezoidal Method: 3.1311764705882354
+True Value: 3.141592653589793
+Simpson Relative: 7.647757511045905e-06
+Trapezoidal Relative 0.003315574025695356
+\end{lstlisting}
+\subsection{Part (c)}
+\begin{lstlisting}[style=console]
+Optimized Simpson with 16 Slices : 3.141592651224822
+Optimized Trapezoidal with 8192 Slices : 3.1415926511062726
+\end{lstlisting}
+\subsection{Part (d)}
+\begin{lstlisting}[language=python]
+ppiwn
+\end{lstlisting}
+
+\begin{lstlisting}[style=console]
+Error 2: 0.00016276037786200348
+\end{lstlisting}
+\subsection{Part (e)}
+
+           
+
+\end{document}

@@ -1,0 +1,30 @@
+import numpy as np
+import matplotlib.pyplot as plt
+import pandas as pd
+import toolkit as tk
+
+# \ddt{N}{t} = - \frac{N}{\tau}
+    
+N_0 = 10
+TAU = 0.5
+STEP = 0.1
+TIME = 5*TAU
+SLICES = 200
+
+def part_1() -> list[float]:
+    time = np.arange(0, TIME, STEP) 
+
+    N_lst = np.zeros(SLICES)
+    
+    N_lst[0] = N_0
+    for i in range(1,SLICES):
+        N_lst[i] = N_lst[i-1] - STEP*(N_lst[i-1]/TIME)
+       
+    plt.plot(time, N_lst)
+
+    return N_lst
+
+if __name__ == "__main__":
+    output = part_1()
+    print(output)
+    input()

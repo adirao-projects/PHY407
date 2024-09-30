@@ -1,0 +1,49 @@
+\documentclass[reprint, amsmath, amssymb, aip, cp]{revtex4-2}
+
+% \usepackage{graphicx}
+% \usepackage{dcolumn}
+% \usepackage{bm}
+
+\input{preamble/preamble}
+\input{preamble/tikz}
+\input{preamble/macros}
+
+
+\usepackage{dblfloatfix}
+\def\bibsection{\section{References}} 
+\setlength{\columnsep}{0.75cm}
+
+% ========================================= %
+% Change for each document [!!!]
+% \newcommand\course{PHY407}	% Course Code [!!!]
+% \newcommand\doctitle{Computational Physics} % Report Title [!!!]
+% \newcommand\authorname{Aditya K. Rao 1008307761}
+% \newcommand\taname{Prof. M. Diamond} % TA Name [!!!]
+\newcommand{\location}{MP134} % Location [!!!]
+% ========================================= %
+
+\usepackage{lipsum}
+
+
+\begin{document}
+    \title{\doctitle}
+    \author{\authorname}
+    \affiliation{
+    University of Toronto, 60 St. George Street, Toronto, Ontario M5S 1A7, Canada}
+    \date{Fall 2024} %Put in date of submission [!!!]
+
+    \preprint{APS/123-QED}
+    \begin{abstract}
+        \lipsum[1]
+    \end{abstract}
+    \maketitle
+    \onecolumngrid
+    \lhead{\firstauthorname\vspace{0.1cm}}
+    \chead{\textbf{\course} \\ \doctitle}
+    \rhead{\textbf{Inst:} \taname}
+
+    %\chapter{Lecture 1}
+    %\include{note_files/Lec01}
+    \include{note_files/Lec02}   
+
+\end{document}
