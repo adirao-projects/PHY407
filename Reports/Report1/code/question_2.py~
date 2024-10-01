@@ -56,6 +56,7 @@ def part_1(low, upp, res):
     combined_fig.set_ylabel(r'function outputs')
     
     plt.show()
+    plt.savefig('part1.png')
 
 def part_2(low, upp, res):
     xdata = np.linspace(low, upp, num=res)
@@ -94,8 +95,8 @@ def part_2(low, upp, res):
     hist_fig.set_xlabel(r'$0.98\leq u\leq1.02$')
     hist_fig.set_ylabel(r'function outputs')
     
-    
     plt.show()
+    plt.savefig('part2.png')
 
 def part_3(low, upp, res):
     xdata = np.linspace(low, upp, num=res)
@@ -109,6 +110,7 @@ def part_3(low, upp, res):
     plt.ylabel(r'Relative Error')
     plt.xlabel(r'$u$')
     plt.title('Noisy Fractional Error')
+    
     plt.show()
 
 def part_4(low, upp, res):
@@ -126,11 +128,14 @@ def part_4(low, upp, res):
     plt.ylabel(r'Roundoff Error')
     plt.xlabel(r'$u$')
     plt.title('Roundoff Error Estimation')
-    plt.show()
 
+    plt.show()
+    plt.savefig('part4.png')
 
 if __name__ == '__main__':
-    part_1(0.98, 1.02, 500)
+    #part_1(0.98, 1.02, 500)
     part_2(0.98, 1.02, 500)
-    part_3(0.980, 0.989, 5000)
-    part_4(0.98, 1.02, 500)
+    #part_3(0.980, 0.989, 5000)
+    #part_4(0.98, 1.02, 500)
+
+

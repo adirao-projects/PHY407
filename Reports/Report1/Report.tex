@@ -47,18 +47,13 @@
 
 %\title{Manuscript Title:\\with Forced Linebreak}% Force line breaks with \\
 \thanks{\textbf{Location:} \location}%
-
-\begin{abstract}
-    \lipsum[1]
-\end{abstract}
-
     \maketitle
     \tableofcontents 
     %\clearpage
     %\pagenumbering{arabic}
     %So the heading doesn't show up on table of contents page
     %\lhead{\yourname\ \vspace{0.1cm} \\ \course}
-\twocolumngrid
+%\twocolumngrid
     \lhead{\firstauthorname\vspace{0.1cm}}
     \chead{\textbf{\course} \\ \doctitle}
     \rhead{\textbf{Prof:} \taname \\ \textbf{Loc:} \location}
@@ -66,27 +61,99 @@
     \section{Question 1}
         \subsection{Part (a)}
 
-        \lstinputlisting[language=psuedo]{q1a.psuedo}
+        %\lstinputlisting[language=psuedo]{q1a.psuedo}
+\begin{lstlisting}
+function RELATIVE_ERROR(VALUE, REFERENCE) {
+    output absolute_value(VALUE - REFERNECE) / REFERENCE
+}
+
+function STD_METHOD_1(X_LIST) {
+    LEN_X = length of X_LIST
+    SUM_X = sum of X_LIST
+    MEAN_X = SUM_X / LEN_X
+
+
+    STD = 0
+
+    for i=0 to LEN_X - 1 {
+        STD = STD + power((X_LIST[i] - MEAN_X),2)
+    }
+
+    STD = power(((1/(LEN_X - 1)) * STD), 0.5)
+
+    output STD
+}
+
+function STD_METHOD_2(X_LIST) {
+    LEN_X = length of X_LIST
+    SUM_X = sum of X_LIST
+    MEAN_X = SUM_X / LEN_X
+
+    STD = 0
+
+    for i=0 to LEN_X - 1 {
+        STD = STD + power(X_LIST[i], 2) - LEN_X*power(MEAN_X, 2)
+    }
+
+    STD = power(((1/(LEN_X - 1)) * STD), 0.5)
+
+    output STD
+}
+
+X_DATA = some list of elements
+STD_1 = STD_METHOD_1(X_DATA)
+STD_2 = STD_METHOD_2(X_DATA)
+TRUE_STD = numpy(X_DATA, ddof=1)
+
+output "Method 1" : RELATIVE_ERROR(STD_1, TRUE_STD)
+
+output "Method 2" : RELATIVE_ERROR(STD_1, TRUE_STD)
+\end{lstlisting}
 
     \subsection{Part (b)}
         %\lstinputlisting[language=python]{../code/question_1.py}
+\begin{lstlisting}[language=python]
+def part_1(route='cdata.txt'):
+    x_data = load_data(route)
+    ref_std = np.std(x_data, ddof=1)
+    sigma1 = std_method_1(x_data)
+    sigma2 = std_method_2(x_data)
+    
+    rel_er_sigma1 = relative(sigma1, ref_std)
+    rel_er_sigma2 = relative(sigma2, ref_std)
+    
+    print(f"Method 1 Sigma: {rel_er_sigma1}")
+    print(f"Method 2 Sigma: {rel_er_sigma2}")
+\end{lstlisting}
+
+\begin{lstlisting}[style=console]
+Method 1 Sigma: 0.0
+Method 2 Sigma: 2.2873460336752e-09
+\end{lstlisting}
 
     \subsection{Part (c)}
-
-% \begin{lstlisting}[console]
-
-% \end{lstlisting}
+\begin{lstlisting}[style=console]
+Normal 1 Method 1: 0.0
+Normal 1 Method 2: 2.1836734414661424e-16
+Normal 2 Method 1: 1.1228049282093325e-16
+Normal 2 Method 2: 0.0006270506030315829
+\end{lstlisting}
 
     \subsection{Part (d)}
-
+\begin{lstlisting}[style=console]
+Psuedocode
+\end{lstlisting}
 % \begin{lstlisting}[console]
 
 % \end{lstlisting}
 
 \section{Question 2}
 \subsection{Part (a)}
+
 \subsection{Part (b)}
+
 \subsection{Part (c)}
+
 \subsection{Part (d)}
 \begin{lstlisting}[style=console]
 STD NPY: 1.4087150935148697e-16
@@ -112,6 +179,7 @@ Trapezoidal Relative 0.003315574025695356
 \subsection{Part (c)}
 \begin{lstlisting}[style=console]
 Optimized Simpson with 16 Slices : 3.141592651224822
+
 Optimized Trapezoidal with 8192 Slices : 3.1415926511062726
 \end{lstlisting}
 \subsection{Part (d)}
@@ -119,6 +187,7 @@ Optimized Trapezoidal with 8192 Slices : 3.1415926511062726
 \begin{lstlisting}[style=console]
 Error 2: 0.00016276037786200348
 \end{lstlisting}
+
 \subsection{Part (e)}
 
            

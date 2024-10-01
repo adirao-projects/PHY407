@@ -6,8 +6,6 @@ def load_data(route):
     return np.loadtxt(route)
 
 def integrate(method, params):
-
-
     # Two subfunctions so the primary operation (integration)
     # is immediately obvious to the user/programmer while
     # the specific implementation is encapsulated unless 
@@ -65,36 +63,47 @@ def integrate(method, params):
 def function_6(x):
     return 4/(1+x**2)
 
-
-def optimize(func, reference, target_acc):
-    bounds = (0,1)
-    n1 = 4
-    n2 = 4
-
+def optimize(func, reference, target_acc, initial_params):
+    
+    # Unpacking initial parameters
+    bounds, n_vals = initial_params
+    n1, n2 = n_vals
+    
+    # Setting high relative errors. These will be overwritten during the first
+    # loop. Inital value is high so the loop runs its first itteration
     rel_err_simp = 1e10
     rel_err_trap = 1e10
     
+    # Using perf_counter for high accuracy. Getting start time for Simpson
+    # method
     t0 = time.perf_counter()
+    
+    # Continue to optimize until target accuracy threshold is surpassed
     while target_acc < rel_err_simp:
         n1 = n1*2
        
-        simp = integrate('s', (function_6, bounds, n1))
+        simp = integrate('s', (func, bounds, n1))
     
         rel_err_simp = np.abs(simp-reference)/reference
     
+    # End time for Simpson method, start time for trapezoidal method
     t1 = time.perf_counter()
     while target_acc < rel_err_trap:
         n2 = n2*2
-        trap = integrate('t', (function_6, bounds, n2))
+        trap = integrate('t', (func, bounds, n2))
     
         rel_err_trap = np.abs(trap-reference)/reference
     
+    # End time for trapezoidal method
     t2 = time.perf_counter()
+    
+    # Outputting results
     print(f"Optimized Simpson with {n1} Slices : {simp}")
     print(f"Optimization Time {(t1-t0)*1e3} ms")
     print(f"Optimized Trapezoidal with {n2} Slices : {trap}")
     print(f"Optimization Time {(t2-t1)*1e3} ms")
     
+    # returning optimized slice numbers
     return (n1, n2)
 
 
@@ -111,34 +120,41 @@ def error_estimation(func, bounds, n1, n2):
 
 
 def part_a():
+    # Setting initial parameters
     n = 4
     bounds = (0,1)
+    # Using perf_counter for high accuracy. Getting start time for Simpson
+    # method
     t0 = time.perf_counter()
     simp = integrate('s', (function_6, bounds, n))
+    
+    # End time for Simpson method, start time for trapezoidal method
     t1 = time.perf_counter()
     trap = integrate('t', (function_6, bounds, n))
+    
+    # End time for trapezoidal method
     t2 = time.perf_counter()
-    print(f"Simpson Method: {simp}")
-    print(f"Execution Time: {(t1-t0)*1e3} ms")
+    
+    # Calculating relative errors to true value (pi)
     rel_err_simp = np.abs(simp-np.pi)/np.pi
     rel_err_trap = np.abs(trap-np.pi)/np.pi
     
+    # Outputting Results
+    print(f"Simpson Method: {simp}")
+    print(f"Execution Time: {(t1-t0)*1e3} ms")
     print(f"Trapezoidal Method: {trap}")
     print(f"Execution Time {(t2-t1)*1e3} ms")
-    print(f"True Value: {np.pi}"
-
-            )
+    print(f"True Value: {np.pi}")
     print(f"Simpson Relative: {rel_err_simp}")
     print(f"Trapezoidal Relative {rel_err_trap}")
 
 
 def part_b():
-    # It may seem weird/inefficient to do this, and it is,
-    # however, there is a reason I have done this for part_b
-    # and part_c. I assume these functions may be used in
-    # the future and I would like to package them in a 
-    # polished, well named, manner
-    n1, n2 = optimize(function_6, np.pi, 1e-9)
+    # It may seem weird/inefficient to do this, and it is, however, there is a 
+    # reason I have done this for part_b and part_c. I assume these functions 
+    # may be used in the future and I would like to package them in a polished, 
+    # well named, manner
+    n1, n2 = optimize(function_6, np.pi, 1e-9, ((0,1), (4, 4)))
 
 
 def part_c():
